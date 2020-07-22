@@ -61,9 +61,9 @@ export default {
               const {data:res}=await this.$http.post('login',this.LoginForm);
              // console.log(res)
              if(res.meta.status!==200){
-                 console.log("登陆失败")
+                 return this.$message.error("登陆失败！");
              }else{
-                 console.log("登陆成功")
+                 return this.$message.success("登陆成功！")
              }
             });
       }
