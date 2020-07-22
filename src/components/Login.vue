@@ -6,9 +6,9 @@
                 <img src="../assets/logo.png" alt="">
             </div>
             <!--登陆表单区域-->
-            <el-form :model="LoginForm" :rules="LoginFormRules" class="login_form">
+            <el-form ref="loginFormRef" :model="LoginForm" :rules="LoginFormRules" class="login_form">
             <!--用户名-->
-              <el-form-item prop="username"> 
+              <el-form-item   prop="username"> 
                 <el-input v-model="LoginForm.username" prefix-icon="iconfont icon-user"></el-input>
               </el-form-item>
              <!--密码-->
@@ -17,8 +17,8 @@
               </el-form-item>  
               <!--按钮区域-->
               <el-form-item class="btns">  
-                <el-button type="primary">登陆</el-button>
-                <el-button type="info">重置</el-button>
+                <el-button type="primary" @click="login('loginFormRef')">登陆</el-button>
+                <el-button type="info" @click="resetForm('loginFormRef')">重置</el-button>
               </el-form-item>               
             </el-form>                     
         </div>
@@ -31,8 +31,8 @@ export default {
         return{
         //登陆表单的数据绑定对象
         LoginForm:{
-            username:'zs',
-            password:'123'
+            // username:'zs',
+            // password:'123'
         },
         //表单的验证规则
         LoginFormRules:{
@@ -46,9 +46,31 @@ export default {
             ]
         }
     } 
-    }
-   
+    },
+  methods:{
+    //  restLoginForm:function () {
+    //      console.log(this)
+    //  }
+        resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
+      login(formName){
+            this.$refs[formName].validate(async(valid) => {
+              // console.log(valid)
+              if(!valid) return;
+              const {data:res}=await this.$http.post('login',this.LoginForm);
+             // console.log(res)
+             if(res.meta.status!==200){
+                 console.log("登陆失败")
+             }else{
+                 console.log("登陆成功")
+             }
+            });
+      }
+  }
+         
     
+
 }
 </script>
 <style lang="less" scoped>
