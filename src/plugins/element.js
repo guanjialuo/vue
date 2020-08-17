@@ -8,4 +8,4 @@ Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Input)
-Vue.prototype.$message=Message   //全局挂载
+Vue.prototype.$message=Message   //全局挂载挂载到vue全局组建上，可以用this

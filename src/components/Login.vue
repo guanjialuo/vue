@@ -31,8 +31,8 @@ export default {
         return{
         //登陆表单的数据绑定对象
         LoginForm:{
-            // username:'zs',
-            // password:'123'
+            username:'admin',
+            password:'123456'
         },
         //表单的验证规则
         LoginFormRules:{
@@ -58,13 +58,34 @@ export default {
             this.$refs[formName].validate(async(valid) => {
               // console.log(valid)
               if(!valid) return;
-              const {data:res}=await this.$http.post('login',this.LoginForm);
+
+          const res=  this.$http.post('login',this.LoginForm).then(res => { 
+              console.log(res.data.data.token)
+              if(res.data.meta.status==200){
+                  this.$message.success("登陆成功")
+                  window.sessionStorage.setItem('token',res.data.data.token);
+                  this.$router.push('/home');
+                  
+              }else{
+                   this.$message.error("登陆失败")
+              }
+
+              //,token只在登陆网站期间生效，登陆之后有token，token保存在ssesionstorge中带着token去访问接口
+            //   if(res.meta.status!==200){
+            //       return this.$message.error("登陆失败！");
+            //   }else{
+            //       return this.$message.success("登陆成功！")
+            //   }
+              })
+          //get(url).then(res => { console.log(res) })
+
+            //   const {data:res}=await this.$http.post('login',this.LoginForm);
              // console.log(res)
-             if(res.meta.status!==200){
-                 return this.$message.error("登陆失败！");
-             }else{
-                 return this.$message.success("登陆成功！")
-             }
+            //  if(res.meta.status!==200){
+            //      return this.$message.error("登陆失败！");
+            //  }else{
+            //      return this.$message.success("登陆成功！")
+            //  }
             });
       }
   }
