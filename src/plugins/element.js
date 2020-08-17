@@ -11,5 +11,5 @@ Vue.use(Input)
 Vue.use(Container)
 Vue.use(Header)
 Vue.use(Aside)
-vue.use(Main)
+Vue.use(Main)
 Vue.prototype.$message=Message   //全局挂载挂载到vue全局组建上，可以用this
