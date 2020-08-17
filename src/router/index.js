@@ -17,7 +17,7 @@ Vue.use(VueRouter)
 const router=new VueRouter({
 
   routes:[
-    {path:'/',redirect:'/login'},//重定向
+     {path:'/',redirect:'/login'},//重定向
     {path:'/login', component:Login},
     {path:'/home', component:home}
 
