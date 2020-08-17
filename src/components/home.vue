@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app">
         <el-button type="info" @click="loginout">退出</el-button>
     </div>
 </template>
